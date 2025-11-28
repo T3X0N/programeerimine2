@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace KooliProjekt.Application.Data
+{
+    internal class kasutaja
+    {
+        public int Id { get; set; }
+        public  string kasutajanimi { get; set; }
+
+        public string parool {  get; set; }
+    }
+}
