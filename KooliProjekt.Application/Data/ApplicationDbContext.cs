@@ -13,7 +13,8 @@ namespace KooliProjekt.Application.Data
         {
         }
 
-        public DbSet<kasutaja> to_kasutaja { get; set; }
-        public DbSet<ToDoItem> ToDoItems { get; set; }
+        //public DbSet<kasutaja>
+        //public DbSet<ToDoItem> ToDoItems { get; set; }
     }
 }
+
