@@ -12,19 +12,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KooliProjekt.Application.Features.kasutajad
 {
-    public class koostisosadQueryHandler : IRequestHandler<logikandedQuery, OperationResult<IList<kasutaja>>>
+    public class õllepruulimisedQueryHandler : IRequestHandler<õllepruulimisedQuery, OperationResult<IList<õllepruulimine>>>
     {
         private readonly ApplicationDbContext _dbContext;
-        public koostisosadQueryHandler(ApplicationDbContext dbContext)
+        public õllepruulimisedQueryHandler(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public async Task<OperationResult<IList<kasutaja>>> Handle(logikandedQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<IList<õllepruulimine>>> Handle(õllepruulimisedQuery request, CancellationToken cancellationToken)
         {
-            var result = new OperationResult<IList<kasutaja>>();
+            var result = new OperationResult<IList<õllepruulimine>>();
             result.Value = await _dbContext
-                .ToKasutaja
+                .ToÕllepruulimine
                 .OrderBy(list => list.kasutajanimi)
                 .ToListAsync();
 

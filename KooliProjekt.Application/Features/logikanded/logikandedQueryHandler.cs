@@ -24,7 +24,7 @@ namespace KooliProjekt.Application.Features.kasutajad
         {
             var result = new OperationResult<IList<logikande>>();
             result.Value = await _dbContext
-                .ToKasutaja
+                .ToLogiKande
                 .OrderBy(list => list.kasutajanimi)
                 .ToListAsync();
 
