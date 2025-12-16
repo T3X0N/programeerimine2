@@ -12,17 +12,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KooliProjekt.Application.Features.kasutajad
 {
-    public class koostisosadQueryHandler : IRequestHandler<logikandedQuery, OperationResult<IList<kasutaja>>>
+    public class logikandedQueryHandler : IRequestHandler<logikandedQuery, OperationResult<IList<logikande>>>
     {
         private readonly ApplicationDbContext _dbContext;
-        public koostisosadQueryHandler(ApplicationDbContext dbContext)
+        public logikandedQueryHandler(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public async Task<OperationResult<IList<kasutaja>>> Handle(logikandedQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<IList<logikande>>> Handle(logikandedQuery request, CancellationToken cancellationToken)
         {
-            var result = new OperationResult<IList<kasutaja>>();
+            var result = new OperationResult<IList<logikande>>();
             result.Value = await _dbContext
                 .ToKasutaja
                 .OrderBy(list => list.kasutajanimi)

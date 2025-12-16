@@ -5,7 +5,7 @@ using MediatR;
 
 namespace KooliProjekt.Application.Features.kasutajad
 {
-    public class KasutajadQuery : IRequest<OperationResult<IList<kasutaja>>>
+    public class koostisosadQuery : IRequest<OperationResult<IList<koostisosa>>>
     {
     }
 }
