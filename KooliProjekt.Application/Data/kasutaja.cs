@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KooliProjekt.Application.Data
 {
-    internal class kasutaja
+   public class kasutaja
     {
         public int Id { get; set; }
         public  string kasutajanimi { get; set; }

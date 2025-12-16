@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KooliProjekt.Application.Data
 {
-    internal class Ollesort
+    public class õllesort
     {
         public int Id { get; set; }
         public string nimi { get; set; }

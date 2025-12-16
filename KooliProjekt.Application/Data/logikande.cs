@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KooliProjekt.Application.Data
 {
-    internal class logikande
+    public class logikande
     {
         public int Id { get; set; }
         public string kuupäev { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KooliProjekt.Application.Data
 {
-    internal class õllepruulimine
+    public class õllepruulimine
     {
         public int Id { get; set; }
         public int partiikood { get; set; }
