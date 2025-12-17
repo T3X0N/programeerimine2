@@ -13,9 +13,9 @@ namespace KooliProjekt.Application.Data
         public int Id { get; set; }
         [Required]
         [StringLength(16)]
-        public  string kasutajanimi { get; set; }
+        public  string Kasutajanimi { get; set; }
         [Required]
         [StringLength(16)]
-        public string parool {  get; set; }
+        public string Parool {  get; set; }
     }
 }
