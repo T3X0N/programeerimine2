@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KooliProjekt.Application.Features.kasutajad
 {
-    public class KasutajadQueryHandler : IRequestHandler<KasutajadQuery, OperationResult<IList<kasutaja>>>
+    public class KasutajadQueryHandler : IRequestHandler<KasutajadQuery, OperationResult<PagedResult<kasutaja>>>
     {
         private readonly ApplicationDbContext _dbContext;
         public KasutajadQueryHandler(ApplicationDbContext dbContext)
@@ -20,14 +20,13 @@ namespace KooliProjekt.Application.Features.kasutajad
             _dbContext = dbContext;
         }
 
-        public async Task<OperationResult<IList<kasutaja>>> Handle(KasutajadQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<PagedResult<kasutaja>>> Handle(KasutajadQuery request, CancellationToken cancellationToken)
         {
-            var result = new OperationResult<IList<kasutaja>>();
+            var result = new OperationResult<PagedResult<kasutaja>>();
             result.Value = await _dbContext
                 .ToKasutaja
                 .OrderBy(list => list.kasutajanimi)
-                .ToListAsync();
-
+                .GetPagedAsync(request.Page, request.PageSize);
             return result;
         }
     }

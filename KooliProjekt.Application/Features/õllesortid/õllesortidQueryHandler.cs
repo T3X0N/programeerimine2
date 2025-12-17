@@ -10,9 +10,9 @@ using KooliProjekt.Application.Infrastructure.Results;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace KooliProjekt.Application.Features.kasutajad
+namespace KooliProjekt.Application.Features.õllesortid
 {
-    public class õllesortidQueryHandler : IRequestHandler<õllesortidQuery, OperationResult<IList<õllesort>>>
+    public class õllesortidQueryHandler : IRequestHandler<õllesortidQuery, OperationResult<PagedResult<õllesort>>>
     {
         private readonly ApplicationDbContext _dbContext;
         public õllesortidQueryHandler(ApplicationDbContext dbContext)
@@ -20,13 +20,13 @@ namespace KooliProjekt.Application.Features.kasutajad
             _dbContext = dbContext;
         }
 
-        public async Task<OperationResult<IList<õllesort>>> Handle(õllesortidQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<PagedResult<õllesort>>> Handle(õllesortidQuery request, CancellationToken cancellationToken)
         {
-            var result = new OperationResult<IList<õllesort>>();
+            var result = new OperationResult<PagedResult<õllesort>>();
             result.Value = await _dbContext
                 .ToÕllesort
                 .OrderBy(list => list.kasutajanimi)
-                .ToListAsync();
+                .GetPagedAsync(request.Page, request.PageSize);
 
             return result;
         }

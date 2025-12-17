@@ -16,8 +16,8 @@ namespace KooliProjekt.Application.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    kasutajanimi = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    parool = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    kasutajanimi = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
+                    parool = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,8 +30,8 @@ namespace KooliProjekt.Application.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nimetus = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ühik = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Nimetus = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
+                    ühik = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
                     ühikuhind = table.Column<float>(type: "real", nullable: false),
                     kogus = table.Column<float>(type: "real", nullable: false),
                     summa = table.Column<float>(type: "real", nullable: false)
@@ -47,9 +47,9 @@ namespace KooliProjekt.Application.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    kuupäev = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    kirjeldus = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    kasutaja = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    kuupäev = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
+                    kirjeldus = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
+                    kasutajanimi = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -62,10 +62,10 @@ namespace KooliProjekt.Application.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    kuupäev = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    kasutaja = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    kuupäev = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
+                    kasutajanimi = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
                     hinne = table.Column<float>(type: "real", nullable: false),
-                    selgitus = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    selgitus = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -79,12 +79,12 @@ namespace KooliProjekt.Application.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     partiikood = table.Column<int>(type: "int", nullable: false),
-                    partiikuupäev = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    kirjeldus = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    koostisosad = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    logi = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    maitsemislogi = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    kokkuvõtte = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    partiikuupäev = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
+                    kirjeldus = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
+                    koostisosad = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
+                    logi = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
+                    maitsemislogi = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
+                    kokkuvõtte = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -97,9 +97,9 @@ namespace KooliProjekt.Application.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    nimi = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    kirjeldus = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    õllepruuliminejaproovipartiid = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    kasutajanimi = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
+                    kirjeldus = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
+                    õllepruuliminejaproovipartiid = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false)
                 },
                 constraints: table =>
                 {

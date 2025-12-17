@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,9 +9,16 @@ namespace KooliProjekt.Application.Data
 {
     public class õllesort
     {
+        [Required]
         public int Id { get; set; }
-        public string nimi { get; set; }
+        [Required]
+        [StringLength(16)]
+        public string kasutajanimi { get; set; }
+        [Required]
+        [StringLength(16)]
         public string kirjeldus { get; set; }
+        [Required]
+        [StringLength(16)]
 
         public List<string> õllepruuliminejaproovipartiid { get; set; }
     }

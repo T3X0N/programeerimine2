@@ -1,11 +1,14 @@
-﻿using System.Collections.Generic;
-using KooliProjekt.Application.Data;
+﻿using KooliProjekt.Application.Data;
+using KooliProjekt.Application.Infrastructure.Paging;
 using KooliProjekt.Application.Infrastructure.Results;
 using MediatR;
+using System.Collections.Generic;
 
-namespace KooliProjekt.Application.Features.kasutajad
+namespace KooliProjekt.Application.Features.logikanded
 {
-    public class logikandedQuery : IRequest<OperationResult<IList<logikande>>>
+    public class logikandedQuery : IRequest<OperationResult<PagedResult<logikande>>>
     {
+        public int Page { get; set; }
+        public int PageSize { get; set; }
     }
 }

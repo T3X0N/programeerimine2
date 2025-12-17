@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KooliProjekt.Application.Features.koostisosad
 {
-    public class koostisosadQueryHandler : IRequestHandler<koostisosadQuery, OperationResult<IList<koostisosa>>>
+    public class koostisosadQueryHandler : IRequestHandler<koostisosadQuery, OperationResult<PagedResult<koostisosa>>>
     {
         private readonly ApplicationDbContext _dbContext;
         public koostisosadQueryHandler(ApplicationDbContext dbContext)
@@ -21,13 +21,13 @@ namespace KooliProjekt.Application.Features.koostisosad
             _dbContext = dbContext;
         }
 
-        public async Task<OperationResult<IList<koostisosa>>> Handle(koostisosadQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<PagedResult<koostisosa>>> Handle(koostisosadQuery request, CancellationToken cancellationToken)
         {
-            var result = new OperationResult<IList<koostisosa>>();
+            var result = new OperationResult<PagedResult<koostisosa>>();
             result.Value = await _dbContext
                 .ToKoostisosa
                 .OrderBy(item => item.Nimetus)
-                .ToListAsync(cancellationToken);
+                .GetPagedAsync(request.Page, request.PageSize);
 
             return result;
         }

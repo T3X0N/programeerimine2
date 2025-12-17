@@ -10,9 +10,9 @@ using KooliProjekt.Application.Infrastructure.Results;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace KooliProjekt.Application.Features.kasutajad
+namespace KooliProjekt.Application.Features.logikanded
 {
-    public class logikandedQueryHandler : IRequestHandler<logikandedQuery, OperationResult<IList<logikande>>>
+    public class logikandedQueryHandler : IRequestHandler<logikandedQuery, OperationResult<PagedResult<logikande>>>
     {
         private readonly ApplicationDbContext _dbContext;
         public logikandedQueryHandler(ApplicationDbContext dbContext)
@@ -20,13 +20,13 @@ namespace KooliProjekt.Application.Features.kasutajad
             _dbContext = dbContext;
         }
 
-        public async Task<OperationResult<IList<logikande>>> Handle(logikandedQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<PagedResult<logikande>>> Handle(logikandedQuery request, CancellationToken cancellationToken)
         {
-            var result = new OperationResult<IList<logikande>>();
+            var result = new OperationResult<PagedResult<logikande>>();
             result.Value = await _dbContext
                 .ToLogiKande
                 .OrderBy(list => list.kasutajanimi)
-                .ToListAsync();
+                .GetPagedAsync(request.Page, request.PageSize);
 
             return result;
         }

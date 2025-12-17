@@ -10,9 +10,9 @@ using KooliProjekt.Application.Infrastructure.Results;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace KooliProjekt.Application.Features.kasutajad
+namespace KooliProjekt.Application.Features.maitsmistelogikanded
 {
-    public class maitsmistelogikandedQueryHandler : IRequestHandler<maitsmistelogikandedQuery, OperationResult<IList<maitsmistelogikande>>>
+    public class maitsmistelogikandedQueryHandler : IRequestHandler<maitsmistelogikandedQuery, OperationResult<PagedResult<maitsmistelogikande>>>
     {
         private readonly ApplicationDbContext _dbContext;
         public maitsmistelogikandedQueryHandler(ApplicationDbContext dbContext)
@@ -20,13 +20,13 @@ namespace KooliProjekt.Application.Features.kasutajad
             _dbContext = dbContext;
         }
 
-        public async Task<OperationResult<IList<maitsmistelogikande>>> Handle(maitsmistelogikandedQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<PagedResult<maitsmistelogikande>>> Handle(maitsmistelogikandedQuery request, CancellationToken cancellationToken)
         {
-            var result = new OperationResult<IList<maitsmistelogikande>>();
+            var result = new OperationResult<PagedResult<maitsmistelogikande>>();
             result.Value = await _dbContext
                 .ToMaitsmistelogikande
                 .OrderBy(list => list.kasutajanimi)
-                .ToListAsync();
+                .GetPagedAsync(request.Page, request.PageSize);
 
             return result;
         }
