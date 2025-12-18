@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using KooliProjekt.Application.Data;
+using KooliProjekt.Application.Data.Repositories;
 using KooliProjekt.Application.Infrastructure.Paging;
 using KooliProjekt.Application.Infrastructure.Results;
 using MediatR;
@@ -14,11 +15,11 @@ namespace KooliProjekt.Application.Features.koostisosad
 {
     public class SavekoostisosadCommandHandler : IRequestHandler<SavekoostisosadCommand, OperationResult>
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly koostisosa1Repository _koostisosaRepository;
 
-        public SavekoostisosadCommandHandler(ApplicationDbContext dbContext)
+        public SavekoostisosadCommandHandler(koostisosa1Repository koostisosaRepository)
         {
-            _dbContext = dbContext;
+            _koostisosaRepository = koostisosaRepository;
         }
 
         public async Task<OperationResult> Handle(SavekoostisosadCommand request, CancellationToken cancellationToken)
@@ -26,24 +27,18 @@ namespace KooliProjekt.Application.Features.koostisosad
             var result = new OperationResult();
 
             var list = new koostisosa();
-            if(request.Id == 0)
+            if (request.Id != 0)
             {
-                await _dbContext.ToKoostisosa.AddAsync(list);
-            }
-            else
-            {
-                list = await _dbContext.ToKoostisosa.FindAsync(request.Id);
-                //_dbContext.ToDoLists.Update(list);
-            }
 
-            list.Id = request.Id;
+                list.Id = request.Id;
             list.Nimetus = request.Nimetus;
             list.ühik = request.ühik;
             list.ühikuhind = request.ühikuhind;
             list.kogus = request.kogus;
             list.summa = request.summa;
 
-            await _dbContext.SaveChangesAsync();
+            }
+            await _koostisosaRepository.SaveAsync(list);
 
             return result;
         }

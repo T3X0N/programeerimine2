@@ -9,31 +9,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KooliProjekt.Application.Features.logikanded
 {
-    public class GetlogikandedQueryHandler : IRequestHandler<GetlogikandedQuery, OperationResult<object>>
+    public class GetToDoListQueryHandler : IRequestHandler<GetToDoListQuery, OperationResult<object>>
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly Repository _toDoListRepository;
 
-        public GetlogikandedQueryHandler(ApplicationDbContext dbContext)
+        public GetToDoListQueryHandler(IToDoListRepository toDoListRepository)
         {
-            _dbContext = dbContext;
+            _toDoListRepository = toDoListRepository;
         }
 
-        public async Task<OperationResult<object>> Handle(GetlogikandedQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<object>> Handle(GetToDoListQuery request, CancellationToken cancellationToken)
         {
             var result = new OperationResult<object>();
+            var list = await _toDoListRepository.GetByIdAsync(request.Id);
 
-            result.Value = await _dbContext
-                .ToLogiKande
-                .Where(list => list.Id == request.Id)
-                .Select(list => new
-                {
-                    Id = list.Id,
-                    kuupäev = list.kuupäev,
-                    kirjeldus = list.kirjeldus,
-                    kasutajanimi = list.kasutajanimi,
+            result.Value = new // Anonymous object
+            {
 
-                })
-                .FirstOrDefaultAsync();
+                Id = list.Id,
+                kuupäev = list.kuupäev,        
+                kirjeldus = list.kirjeldus,
+                kasutajanimi = list.kasutajanimi,
+            };
 
             return result;
         }

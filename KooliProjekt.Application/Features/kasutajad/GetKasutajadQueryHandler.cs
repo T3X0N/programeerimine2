@@ -1,38 +1,37 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using KooliProjekt.Application.Data;
+﻿using KooliProjekt.Application.Data;
+using KooliProjekt.Application.Data.Repositories;
 using KooliProjekt.Application.Infrastructure.Results;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace KooliProjekt.Application.Features.kasutajad
 {
-    public class kasutajadQueryHandler : IRequestHandler<GetkasutajadQuery, OperationResult<object>>
+    public class GetkasutajadQueryHandler : IRequestHandler<GetkasutajadQuery, OperationResult<object>>
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly Kasutaja1Repository _KasutajaRepository;
 
-        public kasutajadQueryHandler(ApplicationDbContext dbContext)
+        public GetkasutajadQueryHandler(Kasutaja1Repository KasutajaRepository)
         {
-            _dbContext = dbContext;
+            _KasutajaRepository = KasutajaRepository;
         }
 
         public async Task<OperationResult<object>> Handle(GetkasutajadQuery request, CancellationToken cancellationToken)
         {
             var result = new OperationResult<object>();
+            var list = await _KasutajaRepository.GetByIdAsync(request.Id);
 
-            result.Value = await _dbContext
-                .ToKasutaja
-                .Where(list => list.Id == request.Id)
-                .Select(list => new
-                {
-                    Id = list.Id,
-                    Kasutajanimi = list.Kasutajanimi,
-                    Parool = list.Parool,
+            result.Value = new
+            {
+                Id = list.Id,
+                Kasutajanimi = list.Kasutajanimi,
+                Parool = list.Parool
+            };
 
-                })
-                .FirstOrDefaultAsync();
+
 
             return result;
         }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using KooliProjekt.Application.Data;
+using KooliProjekt.Application.Data.Repositories;
 using KooliProjekt.Application.Infrastructure.Paging;
 using KooliProjekt.Application.Infrastructure.Results;
 using MediatR;
@@ -14,11 +15,11 @@ namespace KooliProjekt.Application.Features.kasutajad
 {
     public class SaveKasutajadCommandHandler : IRequestHandler<SaveKasutajadCommand, OperationResult>
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly Kasutaja1Repository _KasutajaRepository;
 
-        public SaveKasutajadCommandHandler(ApplicationDbContext dbContext)
+        public SaveKasutajadCommandHandler(Kasutaja1Repository KasutajaRepository)
         {
-            _dbContext = dbContext;
+            _KasutajaRepository = KasutajaRepository;
         }
 
         public async Task<OperationResult> Handle(SaveKasutajadCommand request, CancellationToken cancellationToken)
@@ -28,20 +29,16 @@ namespace KooliProjekt.Application.Features.kasutajad
             var list = new kasutaja();
             if(request.Id == 0)
             {
-                await _dbContext.ToKasutaja.AddAsync(list);
+                list = await _KasutajaRepository.GetByIdAsync(request.Id);
             }
-            else
-            {
-                list = await _dbContext.ToKasutaja.FindAsync(request.Id);
-                //_dbContext.ToDoLists.Update(list);
-            }
+          
 
             list.Id = request.Id;
             list.Kasutajanimi = request.Kasutajanimi;
             list.Parool = request.Parool;
 
 
-            await _dbContext.SaveChangesAsync();
+            await _KasutajaRepository.SaveAsync(list);
 
             return result;
         }
