@@ -38,6 +38,9 @@ namespace KooliProjekt.Application.Features.maitsmislogikanded
 
             list.Id = request.Id;
             list.kuupäev = request.kuupäev;
+            list.kasutajanimi = request.kasutajanimi;
+            list.hinne = request.hinne;
+            list.selgitus = request.selgitus;
 
 
             await _dbContext.SaveChangesAsync();

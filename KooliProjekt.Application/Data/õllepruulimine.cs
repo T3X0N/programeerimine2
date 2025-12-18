@@ -19,13 +19,13 @@ namespace KooliProjekt.Application.Data
         [Required]
         [StringLength(16)]
         public string kirjeldus { get; set; }
-        [Required]
+     
         [StringLength(16)]
         public List<string> koostisosad {  get; set; }
-        [Required]
+       
         [StringLength(16)]
         public List<string> logi {  get; set; }
-        [Required]
+       
         [StringLength(16)]
         public List<string> maitsemislogi {  get; set; }
         [Required]

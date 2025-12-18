@@ -38,6 +38,10 @@ namespace KooliProjekt.Application.Features.koostisosad
 
             list.Id = request.Id;
             list.Nimetus = request.Nimetus;
+            list.ühik = request.ühik;
+            list.ühikuhind = request.ühikuhind;
+            list.kogus = request.kogus;
+            list.summa = request.summa;
 
             await _dbContext.SaveChangesAsync();
 

@@ -39,6 +39,8 @@ namespace KooliProjekt.Application.Features.ToDoLists
 
             list.Id = request.Id;
             list.kuupäev = request.kuupäev;
+            list.kirjeldus = request.kirjeldus;
+            list.kasutajanimi = request.kasutajanimi;
 
             await _dbContext.SaveChangesAsync();
 

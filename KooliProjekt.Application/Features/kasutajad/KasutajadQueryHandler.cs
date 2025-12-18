@@ -25,7 +25,7 @@ namespace KooliProjekt.Application.Features.kasutajad
             var result = new OperationResult<PagedResult<kasutaja>>();
             result.Value = await _dbContext
                 .ToKasutaja
-                .OrderBy(list => list.kasutajanimi)
+                .OrderBy(list => list.Kasutajanimi)
                 .GetPagedAsync(request.Page, request.PageSize);
             return result;
         }

@@ -38,6 +38,8 @@ namespace KooliProjekt.Application.Features.õllesortid
 
             list.Id = request.Id;
             list.kasutajanimi = request.kasutajanimi;
+            list.kirjeldus = request.kirjeldus;
+            list.õllepruuliminejaproovipartiid = request.õllepruuliminejaproovipartiid;
 
             await _dbContext.SaveChangesAsync();
 

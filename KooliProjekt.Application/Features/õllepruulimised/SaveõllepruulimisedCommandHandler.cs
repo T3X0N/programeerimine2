@@ -38,6 +38,13 @@ namespace KooliProjekt.Application.Features.õllepruulimised
 
             list.Id = request.Id;
             list.partiikood = request.partiikood;
+            list.partiikuupäev = request.partiikuupäev;
+            list.kirjeldus = request.kirjeldus;
+            list.koostisosad = request.koostisosad;
+            list.logi = request.logi;
+            list.maitsemislogi = request.maitsemislogi;
+            list.kokkuvõtte = request.kokkuvõtte;
+
 
             await _dbContext.SaveChangesAsync();
 

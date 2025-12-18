@@ -38,6 +38,7 @@ namespace KooliProjekt.Application.Features.kasutajad
 
             list.Id = request.Id;
             list.Kasutajanimi = request.Kasutajanimi;
+            list.Parool = request.Parool;
 
 
             await _dbContext.SaveChangesAsync();
