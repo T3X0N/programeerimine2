@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using KooliProjekt.Application.Data;
+using KooliProjekt.Application.Data.Repositories;
 using KooliProjekt.Application.Infrastructure.Paging;
 using KooliProjekt.Application.Infrastructure.Results;
 using MediatR;
@@ -14,11 +15,11 @@ namespace KooliProjekt.Application.Features.õllepruulimised
 {
     public class SaveõllepruulimisedCommandHandler : IRequestHandler<SaveõllepruulimisedCommand, OperationResult>
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly õllepruulimine1Repository _õllepruulimineRepository;
 
-        public SaveõllepruulimisedCommandHandler(ApplicationDbContext dbContext)
+        public SaveõllepruulimisedCommandHandler(õllepruulimine1Repository õllepruulimineRepository)
         {
-            _dbContext = dbContext;
+            _õllepruulimineRepository = õllepruulimineRepository;
         }
 
         public async Task<OperationResult> Handle(SaveõllepruulimisedCommand request, CancellationToken cancellationToken)
@@ -26,14 +27,9 @@ namespace KooliProjekt.Application.Features.õllepruulimised
             var result = new OperationResult();
 
             var list = new õllepruulimine();
-            if(request.Id == 0)
+            if (request.Id != 0)
             {
-                await _dbContext.ToÕllepruulimine.AddAsync(list);
-            }
-            else
-            {
-                list = await _dbContext.ToÕllepruulimine.FindAsync(request.Id);
-                //_dbContext.ToDoLists.Update(list);
+                list = await _õllepruulimineRepository.GetByIdAsync(request.Id);
             }
 
             list.Id = request.Id;
@@ -46,7 +42,7 @@ namespace KooliProjekt.Application.Features.õllepruulimised
             list.kokkuvõtte = request.kokkuvõtte;
 
 
-            await _dbContext.SaveChangesAsync();
+            await _õllepruulimineRepository.SaveAsync(list);
 
             return result;
         }

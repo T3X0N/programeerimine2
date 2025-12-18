@@ -5,35 +5,34 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using KooliProjekt.Application.Data;
+using KooliProjekt.Application.Data.Repositories;
+using KooliProjekt.Application.Features.maitsmislogikanded;
 using KooliProjekt.Application.Infrastructure.Paging;
 using KooliProjekt.Application.Infrastructure.Results;
 using MediatR;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace KooliProjekt.Application.Features.maitsmislogikanded
+namespace KooliProjekt.Application.Features.maitsmistelogikanded
 {
-    public class SavemaitsmislogikandedCommandHandler : IRequestHandler<SavemaitsmislogikandedCommand, OperationResult>
-    {
-        private readonly ApplicationDbContext _dbContext;
+   
 
-        public SavemaitsmislogikandedCommandHandler(ApplicationDbContext dbContext)
+        public class SavemaitsmislogikandedCommandHandler : IRequestHandler<SavemaitsmislogikandedCommand, OperationResult>
         {
-            _dbContext = dbContext;
-        }
+            private readonly maitsmistelogikande1Repository _maitsmistelogikandeRepository;
 
-        public async Task<OperationResult> Handle(SavemaitsmislogikandedCommand request, CancellationToken cancellationToken)
-        {
-            var result = new OperationResult();
-
-            var list = new maitsmistelogikande();
-            if(request.Id == 0)
+            public SavemaitsmislogikandedCommandHandler(maitsmistelogikande1Repository maitsmistelogikandeRepository)
             {
-                await _dbContext.ToMaitsmistelogikande.AddAsync(list);
+                _maitsmistelogikandeRepository = maitsmistelogikandeRepository;
             }
-            else
+
+            public async Task<OperationResult> Handle(SavemaitsmislogikandedCommand request, CancellationToken cancellationToken)
             {
-                list = await _dbContext.ToMaitsmistelogikande.FindAsync(request.Id);
-                //_dbContext.ToDoLists.Update(list);
+                var result = new OperationResult();
+
+                var list = new maitsmistelogikande();
+                if (request.Id != 0)
+                {
+                list = await _maitsmistelogikandeRepository.GetByIdAsync(request.Id);
             }
 
             list.Id = request.Id;
@@ -43,7 +42,7 @@ namespace KooliProjekt.Application.Features.maitsmislogikanded
             list.selgitus = request.selgitus;
 
 
-            await _dbContext.SaveChangesAsync();
+            await _maitsmistelogikandeRepository.SaveAsync(list);
 
             return result;
         }

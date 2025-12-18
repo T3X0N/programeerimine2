@@ -1,4 +1,5 @@
 ﻿using KooliProjekt.Application.Data;
+using KooliProjekt.Application.Data.Repositories;
 using KooliProjekt.Application.Features.õllepruulimised;
 using KooliProjekt.Application.Infrastructure.Results;
 using MediatR;
@@ -12,33 +13,32 @@ namespace KooliProjekt.Application.Features.õllepruulimised
 {
     public class GetõllepruulimisedQueryHandler : IRequestHandler<GetõllepruulimisedQuery, OperationResult<object>>
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly õllepruulimine1Repository _õllepruulimineRepository;
 
-        public GetõllepruulimisedQueryHandler(ApplicationDbContext dbContext)
+        public GetõllepruulimisedQueryHandler(õllepruulimine1Repository õllepruulimineRepository)
         {
-            _dbContext = dbContext;
+            _õllepruulimineRepository = õllepruulimineRepository;
         }
 
         public async Task<OperationResult<object>> Handle(GetõllepruulimisedQuery request, CancellationToken cancellationToken)
         {
             var result = new OperationResult<object>();
+            var list = await _õllepruulimineRepository.GetByIdAsync(request.Id);
 
-            result.Value = await _dbContext
-                .ToÕllepruulimine
-                .Where(list => list.Id == request.Id)
-                .Select(list => new
-                {
-                    Id = list.Id,
-                    partiikood = list.partiikood,
-                    partiikuupäev = list.partiikuupäev,
-                    kirjeldus = list.kirjeldus,
-                    koostisosad = list.koostisosad,
-                    logi = list.logi,
-                    maitsemislogi = list.maitsemislogi,
-                    kokkuvõtte = list.kokkuvõtte
+            result.Value = new // Anonymous object
 
-                })
-                .FirstOrDefaultAsync();
+
+            {
+                Id = list.Id,
+                partiikood = list.partiikood,
+                partiikuupäev = list.partiikuupäev,
+                kirjeldus = list.kirjeldus,
+                koostisosad = list.koostisosad,
+                logi = list.logi,
+                maitsemislogi = list.maitsemislogi,
+                kokkuvõtte = list.kokkuvõtte
+
+            };
 
             return result;
         }
