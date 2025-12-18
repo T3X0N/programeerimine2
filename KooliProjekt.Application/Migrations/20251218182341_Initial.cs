@@ -62,10 +62,10 @@ namespace KooliProjekt.Application.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    kuupäev = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
-                    kasutajanimi = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
+                    kuupäev = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
+                    kasutajanimi = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
                     hinne = table.Column<float>(type: "real", nullable: false),
-                    selgitus = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false)
+                    selgitus = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -99,7 +99,7 @@ namespace KooliProjekt.Application.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     kasutajanimi = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
                     kirjeldus = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
-                    õllepruuliminejaproovipartiid = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false)
+                    õllepruuliminejaproovipartiid = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false)
                 },
                 constraints: table =>
                 {

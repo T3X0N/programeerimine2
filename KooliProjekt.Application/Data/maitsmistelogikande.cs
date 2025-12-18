@@ -12,16 +12,16 @@ namespace KooliProjekt.Application.Data
         [Required]
         public int Id { get; set; }
         [Required]
-        [StringLength(16)]
+        [StringLength(32)]
 
         public string kuupäev { get; set; }
         [Required]
-        [StringLength(16)]
+        [StringLength(32)]
         public string kasutajanimi { get; set; }
         [Required]
         public float hinne { get; set; }
         [Required]
-        [StringLength(16)]
+        [StringLength(32)]
         public string selgitus { get; set; }
     }
 }

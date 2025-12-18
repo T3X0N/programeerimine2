@@ -18,7 +18,7 @@ namespace KooliProjekt.Application.Data
         [StringLength(16)]
         public string kirjeldus { get; set; }
         [Required]
-        [StringLength(16)]
+        [StringLength(32)]
 
         public List<string> õllepruuliminejaproovipartiid { get; set; }
     }

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KooliProjekt.Application.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251218173927_Initial")]
+    [Migration("20251218182341_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -120,18 +120,18 @@ namespace KooliProjekt.Application.Migrations
 
                     b.Property<string>("kasutajanimi")
                         .IsRequired()
-                        .HasMaxLength(16)
-                        .HasColumnType("nvarchar(16)");
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)");
 
                     b.Property<string>("kuupäev")
                         .IsRequired()
-                        .HasMaxLength(16)
-                        .HasColumnType("nvarchar(16)");
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)");
 
                     b.Property<string>("selgitus")
                         .IsRequired()
-                        .HasMaxLength(16)
-                        .HasColumnType("nvarchar(16)");
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)");
 
                     b.HasKey("Id");
 
@@ -201,8 +201,8 @@ namespace KooliProjekt.Application.Migrations
 
                     b.Property<string>("õllepruuliminejaproovipartiid")
                         .IsRequired()
-                        .HasMaxLength(16)
-                        .HasColumnType("nvarchar(16)");
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)");
 
                     b.HasKey("Id");
 

@@ -35,36 +35,36 @@ namespace KooliProjekt.Application.Data
 
             for(var i = 0; i < 10; i++)
             {
-                var list = new kasutaja { Id = i,Kasutajanimi = "kasutaja" + (i + 1), Parool = "kasutaja" + (i + 1) };
+                var list = new kasutaja { Kasutajanimi = "kasutaja" + (i + 1), Parool = "kasutaja" + (i + 1) };
                 _dbContext.ToKasutaja.Add(list);
 
            
 
 
-                var list2 = new koostisosa { Id = i, Nimetus = "koostisosa" + (i + 1), ühik = "koostisosa" + (i + 1), ühikuhind = (i + 1), kogus = (i + 1), summa = (i + 1) };
+                var list2 = new koostisosa { Nimetus = "koostisosa" + (i + 1), ühik = "koostisosa" + (i + 1), ühikuhind = (i + 1), kogus = (i + 1), summa = (i + 1) };
                 _dbContext.ToKoostisosa.Add(list2);
 
         
 
 
-                var list7 = new logikande { Id = i, kuupäev = "logikande" + (i + 1), kirjeldus = "logikande" + (i + 1), kasutajanimi = "logikande" + (i + 1) };
+                var list7 = new logikande { kuupäev = "logikande" + (i + 1), kirjeldus = "logikande" + (i + 1), kasutajanimi = "logikande" + (i + 1) };
                 _dbContext.ToLogiKande.Add(list7);
 
 
 
-                var list10 = new maitsmistelogikande { Id = i, kuupäev = "maitsmistelogikande" + (i + 1), kasutajanimi = "maitsmistelogikande" + (i + 1), hinne = (i + 1), selgitus = "maitsmistelogikande" + (i + 1) };
+                var list10 = new maitsmistelogikande { kuupäev = "maitsmistelogikande" + (i + 1), kasutajanimi = "maitsmistelogikande" + (i + 1), hinne = (i + 1), selgitus = "maitsmistelogikande" + (i + 1) };
                 _dbContext.ToMaitsmistelogikande.Add(list10);
 
 
 
 
-                var list14 = new õllepruulimine { Id = i, partiikood = (i + 1), partiikuupäev = "õllepruulimine" + (i + 1), kirjeldus = "õllepruulimine" + (i + 1), kokkuvõtte = "õllepruulimine" + (i + 1) };
+                var list14 = new õllepruulimine { partiikood = (i + 1), partiikuupäev = "õllepruulimine" + (i + 1), kirjeldus = "õllepruulimine" + (i + 1), kokkuvõtte = "õllepruulimine" + (i + 1) };
                 _dbContext.ToÕllepruulimine.Add(list14);
 
 
 
 
-                var list18 = new õllesort { Id = i, kasutajanimi = "õllesort" + (i + 1), kirjeldus = "õllesort" + (i + 1), õllepruuliminejaproovipartiid = ["mango"] };
+                var list18 = new õllesort { kasutajanimi = "õllesort" + (i + 1), kirjeldus = "õllesort" + (i + 1), õllepruuliminejaproovipartiid = ["mango"] };
                 _dbContext.ToÕllesort.Add(list18);
             }
 
