@@ -1,0 +1,41 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using KooliProjekt.Application.Data;
+using KooliProjekt.Application.Infrastructure.Results;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+
+namespace KooliProjekt.Application.Features.õllesortid
+{
+    /// <summary>
+    /// 14.11.2025
+    /// Listi kustutamise commandi handler. 
+    /// Handle meetodis toimub tegelik kustutamine
+    /// Muutuja request tuleb sisse brauserist
+    /// </summary>
+    public class DeleteõllesortidCommandHandler : IRequestHandler<DeleteõllesortidCommand, OperationResult>
+    {
+        private readonly ApplicationDbContext _dbContext;
+
+        public DeleteõllesortidCommandHandler(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
+        public async Task<OperationResult> Handle(DeleteõllesortidCommand request, CancellationToken cancellationToken)
+        {
+            var result = new OperationResult();
+
+            await _dbContext
+                .ToÕllesort
+                .Where(t => t.Id == request.Id)
+                .ExecuteDeleteAsync();
+
+            return result;
+        }
+    }
+}
