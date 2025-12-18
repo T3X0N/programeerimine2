@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace KooliProjekt.Application.Data
 {
-   public class koostisosa
+   public class koostisosa : Entity
     {
-        [Required]
-        public int Id { get; set; }
+      
         [Required]
         [StringLength(16)]
         public string Nimetus { get; set; }

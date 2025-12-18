@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace KooliProjekt.Application.Data
 {
-    public class õllepruulimine
+    public class õllepruulimine : Entity
     {
-        [Required]
-        public int Id { get; set; }
         [Required]
         public int partiikood { get; set; }
         [Required]

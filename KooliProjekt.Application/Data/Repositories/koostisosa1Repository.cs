@@ -9,10 +9,10 @@ namespace KooliProjekt.Application.Data.Repositories
     // 28.11
     // ToDo listide repository interface (Program.cs failis
     // tuleb see ka ära regada)
-    public interface IToDoListRepository
+    public interface koostisosa1Repository
     {
-        Task<ToDoList> GetByIdAsync(int id);
-        Task SaveAsync(ToDoList list);
-        Task DeleteAsync(ToDoList entity);
+        Task<koostisosa> GetByIdAsync(int id);
+        Task SaveAsync(koostisosa list);
+        Task DeleteAsync(koostisosa entity);
     }
 }

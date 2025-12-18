@@ -9,9 +9,9 @@ namespace KooliProjekt.Application.Data.Repositories
 {
     // 28.11
     // ToDo listide repository klass
-    public class ToDoListRepository : BaseRepository<ToDoList>, IToDoListRepository
+    public class õllesortRepository : BaseRepository<õllesort>, õllesort1Repository
     {
-        public ToDoListRepository(ApplicationDbContext dbContext) : 
+        public õllesortRepository(ApplicationDbContext dbContext) : 
             base(dbContext)
         {
         }
@@ -20,11 +20,10 @@ namespace KooliProjekt.Application.Data.Repositories
         // mis on seotud ToDoListidega
 
         // BaseRepository ei tea, et Get peab tooma kaasa ka Itemsid
-        public override async Task<ToDoList> GetByIdAsync(int id)
+        public override async Task<õllesort> GetByIdAsync(int id)
         {
             return await DbContext
-                .ToDoLists
-                .Include(list => list.Items)
+                .ToÕllesort
                 .Where(list => list.Id == id)
                 .FirstOrDefaultAsync();
         }
