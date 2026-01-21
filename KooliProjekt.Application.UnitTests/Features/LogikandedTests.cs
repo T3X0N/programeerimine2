@@ -9,7 +9,7 @@ using Xunit;
 
 namespace KooliProjekt.Application.UnitTests.Features
 {
-    public class ToDoListTests : TestBase
+    public class LogikandedTests : TestBase
     {
         [Fact]
         public void Get_throws_if_dbcontext_is_null()
