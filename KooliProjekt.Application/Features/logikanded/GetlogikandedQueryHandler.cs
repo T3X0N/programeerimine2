@@ -6,10 +6,11 @@ using KooliProjekt.Application.Data;
 using KooliProjekt.Application.Infrastructure.Results;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using KooliProjekt.Application.Dto;
 
 namespace KooliProjekt.Application.Features.logikanded
 {
-    public class GetlogikandedQueryHandler : IRequestHandler<GetlogikandedQuery, OperationResult<object>>
+    public class GetlogikandedQueryHandler : IRequestHandler<GetlogikandedQuery, OperationResult<logikandeDto>>
     {
         private readonly ApplicationDbContext _dbContext;
 
@@ -18,14 +19,14 @@ namespace KooliProjekt.Application.Features.logikanded
             _dbContext = dbContext;
         }
 
-        public async Task<OperationResult<object>> Handle(GetlogikandedQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<logikandeDto>> Handle(GetlogikandedQuery request, CancellationToken cancellationToken)
         {
-            var result = new OperationResult<object>();
+            var result = new OperationResult<logikandeDto>();
 
             result.Value = await _dbContext
                 .ToLogiKande
                 .Where(list => list.Id == request.Id)
-                .Select(list => new
+                .Select(list => new logikandeDto
                 {
                     Id = list.Id,
                     kuupäev = list.kuupäev,

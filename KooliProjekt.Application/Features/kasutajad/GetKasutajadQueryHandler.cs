@@ -19,14 +19,14 @@ namespace KooliProjekt.Application.Features.kasutajad
             _dbContext = dbContext;
         }
 
-        public async Task<OperationResult<object>> Handle(GetkasutajadQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<kasutajaDto>> Handle(GetkasutajadQuery request, CancellationToken cancellationToken)
         {
-            var result = new OperationResult<object>();
+            var result = new OperationResult<kasutajaDto>();
 
             result.Value = await _dbContext
                 .ToKasutaja
                 .Where(list => list.Id == request.Id)
-                .Select(list => new
+                .Select(list => new kasutajaDto
                 {
                     Id = list.Id,
                     Kasutajanimi = list.Kasutajanimi,

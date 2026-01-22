@@ -7,10 +7,11 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using KooliProjekt.Application.Dto;
 
 namespace KooliProjekt.Application.Features.õllesortid
 {
-    public class GetõllesortidQueryHandler : IRequestHandler<GetõllesortidQuery, OperationResult<object>>
+    public class GetõllesortidQueryHandler : IRequestHandler<GetõllesortidQuery, OperationResult<õllesortDto>>
     {
         private readonly ApplicationDbContext _dbContext;
 
@@ -19,15 +20,15 @@ namespace KooliProjekt.Application.Features.õllesortid
             _dbContext = dbContext;
         }
 
-        public async Task<OperationResult<object>> Handle(GetõllesortidQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<õllesortDto>> Handle(GetõllesortidQuery request, CancellationToken cancellationToken)
         {
-            var result = new OperationResult<object>();
+            var result = new OperationResult<õllesortDto>();
 
             result.Value = await _dbContext
                 .ToÕllesort
 
                 .Where(list => list.Id == request.Id)
-                .Select(list => new
+                .Select(list => new õllesortDto
                 {
                     Id = list.Id,
                     kasutajanimi = list.kasutajanimi,

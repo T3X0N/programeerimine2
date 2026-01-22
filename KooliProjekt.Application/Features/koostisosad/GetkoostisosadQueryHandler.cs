@@ -21,12 +21,12 @@ namespace KooliProjekt.Application.Features.koostisosad
 
         public async Task<OperationResult<koostisosaDto>> Handle(GetkoostisosadQuery request, CancellationToken cancellationToken)
         {
-            var result = new OperationResult<object>();
+            var result = new OperationResult<koostisosaDto>();
 
             result.Value = await _dbContext
                 .ToKoostisosa
                 .Where(list => list.Id == request.Id)
-                .Select(list => new
+                .Select(list => new koostisosaDto
                 {
                     Id = list.Id,
                     Nimetus = list.Nimetus,

@@ -6,10 +6,11 @@ using KooliProjekt.Application.Data;
 using KooliProjekt.Application.Infrastructure.Results;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using KooliProjekt.Application.Dto;
 
 namespace KooliProjekt.Application.Features.maitsmislogikanded
 {
-    public class GetmaitsmislogikandedQueryHandler : IRequestHandler<GetmaitsmislogikandedQuery, OperationResult<object>>
+    public class GetmaitsmislogikandedQueryHandler : IRequestHandler<GetmaitsmislogikandedQuery, OperationResult<maitsmistelogikandeDto>>
     {
         private readonly ApplicationDbContext _dbContext;
 
@@ -18,14 +19,14 @@ namespace KooliProjekt.Application.Features.maitsmislogikanded
             _dbContext = dbContext;
         }
 
-        public async Task<OperationResult<object>> Handle(GetmaitsmislogikandedQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<maitsmistelogikandeDto>> Handle(GetmaitsmislogikandedQuery request, CancellationToken cancellationToken)
         {
-            var result = new OperationResult<object>();
+            var result = new OperationResult<maitsmistelogikandeDto>();
 
             result.Value = await _dbContext
                 .ToMaitsmistelogikande
                 .Where(list => list.Id == request.Id)
-                .Select(list => new
+                .Select(list => new maitsmistelogikandeDto
                 {
                     Id = list.Id,
                     kuupäev = list.kuupäev,
