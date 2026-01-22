@@ -6,10 +6,11 @@ using KooliProjekt.Application.Data;
 using KooliProjekt.Application.Infrastructure.Results;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using KooliProjekt.Application.Dto;
 
 namespace KooliProjekt.Application.Features.koostisosad
 {
-    public class GetkoostisosadQueryHandler : IRequestHandler<GetkoostisosadQuery, OperationResult<object>>
+    public class GetkoostisosadQueryHandler : IRequestHandler<GetkoostisosadQuery, OperationResult<koostisosaDto>>
     {
         private readonly ApplicationDbContext _dbContext;
 
@@ -18,7 +19,7 @@ namespace KooliProjekt.Application.Features.koostisosad
             _dbContext = dbContext;
         }
 
-        public async Task<OperationResult<object>> Handle(GetkoostisosadQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<koostisosaDto>> Handle(GetkoostisosadQuery request, CancellationToken cancellationToken)
         {
             var result = new OperationResult<object>();
 

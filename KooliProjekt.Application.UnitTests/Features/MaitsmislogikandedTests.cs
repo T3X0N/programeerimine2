@@ -4,19 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KooliProjekt.Application.Data;
+using KooliProjekt.Application.Features.maitsmislogikanded;
 using KooliProjekt.Application.Features.ToDoLists;
 using Xunit;
 
 namespace KooliProjekt.Application.UnitTests.Features
 {
-    public class MaitsmislogikandedTests : TestBase
+    public class MaitsmislogikandedTests : ServiceTestBase
     {
         [Fact]
         public void Get_throws_if_dbcontext_is_null()
         {
             Assert.Throws<ArgumentNullException>(() => 
             {
-                new GetToDoListQueryHandler(null);
+                new GetmaitsmislogikandedQueryHandler(null);
             });
         }
 
@@ -24,10 +25,10 @@ namespace KooliProjekt.Application.UnitTests.Features
         public async Task Get_should_return_object_if_object_exists()
         {
             // Arrange
-            var query = new GetToDoListQuery { Id = 1 };
-            var todoList = new ToDoList { Title = "Test ToDo List" };
-            var handler = new GetToDoListQueryHandler(DbContext);
-            await DbContext.ToDoLists.AddAsync(todoList);  
+            var query = new GetmaitsmislogikandedQuery { Id = 0 };
+            var todoList = new maitsmistelogikande { kuupäev = "jan", kasutajanimi="proov2", hinne=3, selgitus="okei" };
+            var handler = new GetmaitsmislogikandedQueryHandler(DbContext);
+            await DbContext.ToMaitsmistelogikande.AddAsync(todoList);  
             await DbContext.SaveChangesAsync();
 
             // Act
@@ -43,10 +44,10 @@ namespace KooliProjekt.Application.UnitTests.Features
         public async Task Get_should_return_null_if_object_does_not_exist()
         {
             // Arrange
-            var query = new GetToDoListQuery { Id = 101 };
-            var todoList = new ToDoList { Title = "Test ToDo List" };
-            var handler = new GetToDoListQueryHandler(DbContext);
-            await DbContext.ToDoLists.AddAsync(todoList);
+            var query = new GetmaitsmislogikandedQuery { Id = 101 };
+            var todoList = new maitsmistelogikande { kuupäev = "jan", kasutajanimi = "proov2", hinne = 3, selgitus = "okei" };
+            var handler = new GetmaitsmislogikandedQueryHandler(DbContext);
+            await DbContext.ToMaitsmistelogikande.AddAsync(todoList);
             await DbContext.SaveChangesAsync();
 
             // Act

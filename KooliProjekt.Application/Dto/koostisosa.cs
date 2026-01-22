@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KooliProjekt.Application.Data
+namespace KooliProjekt.Application.Dto
 {
-   public class koostisosa
+   public class koostisosaDto
     {
         [Required]
         public int Id { get; set; }

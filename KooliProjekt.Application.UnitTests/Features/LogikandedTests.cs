@@ -4,19 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KooliProjekt.Application.Data;
+using KooliProjekt.Application.Features.logikanded;
+using KooliProjekt.Application.Features.maitsmislogikanded;
 using KooliProjekt.Application.Features.ToDoLists;
 using Xunit;
 
 namespace KooliProjekt.Application.UnitTests.Features
 {
-    public class LogikandedTests : TestBase
+    public class LogikandedTests : ServiceTestBase
     {
         [Fact]
         public void Get_throws_if_dbcontext_is_null()
         {
             Assert.Throws<ArgumentNullException>(() => 
             {
-                new GetToDoListQueryHandler(null);
+                new GetlogikandedQueryHandler(null);
             });
         }
 
@@ -24,10 +26,10 @@ namespace KooliProjekt.Application.UnitTests.Features
         public async Task Get_should_return_object_if_object_exists()
         {
             // Arrange
-            var query = new GetToDoListQuery { Id = 1 };
-            var todoList = new ToDoList { Title = "Test ToDo List" };
-            var handler = new GetToDoListQueryHandler(DbContext);
-            await DbContext.ToDoLists.AddAsync(todoList);  
+            var query = new GetlogikandedQuery { Id = 0 };
+            var todoList = new logikande { kuupäev = "veb", kirjeldus= "super", kasutajanimi="proov1" };
+            var handler = new GetlogikandedQueryHandler(DbContext);
+            await DbContext.ToLogiKande.AddAsync(todoList);  
             await DbContext.SaveChangesAsync();
 
             // Act
@@ -43,10 +45,10 @@ namespace KooliProjekt.Application.UnitTests.Features
         public async Task Get_should_return_null_if_object_does_not_exist()
         {
             // Arrange
-            var query = new GetToDoListQuery { Id = 101 };
-            var todoList = new ToDoList { Title = "Test ToDo List" };
-            var handler = new GetToDoListQueryHandler(DbContext);
-            await DbContext.ToDoLists.AddAsync(todoList);
+            var query = new GetlogikandedQuery { Id = 101 };
+            var todoList = new logikande { kuupäev = "veb", kirjeldus = "super", kasutajanimi = "proov1" };
+            var handler = new GetlogikandedQueryHandler(DbContext);
+            await DbContext.ToLogiKande.AddAsync(todoList);
             await DbContext.SaveChangesAsync();
 
             // Act

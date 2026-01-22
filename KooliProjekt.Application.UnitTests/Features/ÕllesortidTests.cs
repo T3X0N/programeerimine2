@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using KooliProjekt.Application.Data;
 using KooliProjekt.Application.Features.kasutajad;
+using KooliProjekt.Application.Features.õllesortid;
 using KooliProjekt.Application.Features.ToDoLists;
 using Xunit;
 
@@ -17,7 +18,7 @@ namespace KooliProjekt.Application.UnitTests.Features
         {
             Assert.Throws<ArgumentNullException>(() => 
             {
-                new GetkasutajadQueryHandler(null);
+                new GetõllesortidQueryHandler(null);
             });
         }
 
@@ -25,10 +26,10 @@ namespace KooliProjekt.Application.UnitTests.Features
         public async Task Get_should_return_object_if_object_exists()
         {
             // Arrange
-            var query = new GetKasutajaQuery { Id = 1 };
-            var todoList = new ToDoList { Title = "Test ToDo List" };
-            var handler = new GetToDoListQueryHandler(DbContext);
-            await DbContext.ToDoLists.AddAsync(todoList);  
+            var query = new GetõllesortidQuery { Id = 0 };
+            var todoList = new õllesort { kasutajanimi = "proov3", kirjeldus="meh", õllepruuliminejaproovipartiid = ["idk"] };
+            var handler = new GetõllesortidQueryHandler(DbContext);
+            await DbContext.ToÕllesort.AddAsync(todoList);  
             await DbContext.SaveChangesAsync();
 
             // Act
@@ -44,10 +45,10 @@ namespace KooliProjekt.Application.UnitTests.Features
         public async Task Get_should_return_null_if_object_does_not_exist()
         {
             // Arrange
-            var query = new GetToDoListQuery { Id = 101 };
-            var todoList = new ToDoList { Title = "Test ToDo List" };
-            var handler = new GetToDoListQueryHandler(DbContext);
-            await DbContext.ToDoLists.AddAsync(todoList);
+            var query = new GetõllesortidQuery { Id = 101 };
+            var todoList = new õllesort { kasutajanimi = "proov3", kirjeldus = "meh", õllepruuliminejaproovipartiid = ["idk"] };
+            var handler = new GetõllesortidQueryHandler(DbContext);
+            await DbContext.ToÕllesort.AddAsync(todoList);
             await DbContext.SaveChangesAsync();
 
             // Act
