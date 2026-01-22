@@ -1,0 +1,35 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace KooliProjekt.Application.Dto
+{
+    public class õllepruulimineDto
+    {
+        [Required]
+        public int Id { get; set; }
+        [Required]
+        public int partiikood { get; set; }
+        [Required]
+        [StringLength(16)]
+        public string partiikuupäev {  get; set; }
+        [Required]
+        [StringLength(16)]
+        public string kirjeldus { get; set; }
+     
+        [StringLength(16)]
+        public List<string> koostisosad {  get; set; }
+       
+        [StringLength(16)]
+        public List<string> logi {  get; set; }
+       
+        [StringLength(16)]
+        public List<string> maitsemislogi {  get; set; }
+        [Required]
+        [StringLength(16)]
+        public string kokkuvõtte {  get; set; }
+    }
+}

@@ -6,14 +6,15 @@ using KooliProjekt.Application.Data;
 using KooliProjekt.Application.Infrastructure.Results;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using KooliProjekt.Application.Dto;
 
 namespace KooliProjekt.Application.Features.kasutajad
 {
-    public class kasutajadQueryHandler : IRequestHandler<GetkasutajadQuery, OperationResult<object>>
+    public class GetKasutajadQueryHandler : IRequestHandler<GetkasutajadQuery, OperationResult<kasutajaDto>>
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public kasutajadQueryHandler(ApplicationDbContext dbContext)
+        public GetKasutajadQueryHandler(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -35,6 +36,11 @@ namespace KooliProjekt.Application.Features.kasutajad
                 .FirstOrDefaultAsync();
 
             return result;
+        }
+
+        Task<OperationResult<kasutajaDto>> IRequestHandler<GetkasutajadQuery, OperationResult<kasutajaDto>>.Handle(GetkasutajadQuery request, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }

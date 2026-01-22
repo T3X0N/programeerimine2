@@ -17,7 +17,7 @@ namespace KooliProjekt.Application.UnitTests.Features
         {
             Assert.Throws<ArgumentNullException>(() => 
             {
-                new getka(null);
+                new GetKasutajadQueryHandler(null);
             });
         }
 
@@ -25,9 +25,9 @@ namespace KooliProjekt.Application.UnitTests.Features
         public async Task Get_should_return_object_if_object_exists()
         {
             // Arrange
-            var query = new GetkasutajadQuery { Id = 1 };
-            var todoList = new kasutaja { Title = "Test kasutaja" };
-            var handler = new GetkasutajadQueryHandler(DbContext);
+            var query = new GetkasutajadQuery { Id = 0 };
+            var todoList = new kasutaja { Kasutajanimi = "kasutaja1", Parool="1234" };
+            var handler = new GetKasutajadQueryHandler(DbContext);
             await DbContext.ToKasutaja.AddAsync(todoList);  
             await DbContext.SaveChangesAsync();
 
@@ -44,10 +44,10 @@ namespace KooliProjekt.Application.UnitTests.Features
         public async Task Get_should_return_null_if_object_does_not_exist()
         {
             // Arrange
-            var query = new GetToDoListQuery { Id = 101 };
-            var todoList = new ToDoList { Title = "Test ToDo List" };
-            var handler = new GetToDoListQueryHandler(DbContext);
-            await DbContext.ToDoLists.AddAsync(todoList);
+            var query = new GetkasutajadQuery { Id = 101 };
+            var todoList = new kasutaja { Kasutajanimi = "kasutaja1", Parool = "1234" };
+            var handler = new GetKasutajadQueryHandler(DbContext);
+            await DbContext.ToKasutaja.AddAsync(todoList);
             await DbContext.SaveChangesAsync();
 
             // Act
