@@ -16,6 +16,10 @@ namespace KooliProjekt.Application.Features.maitsmislogikanded
 
         public GetmaitsmislogikandedQueryHandler(ApplicationDbContext dbContext)
         {
+            if (dbContext == null)
+            {
+                throw new ArgumentNullException(nameof(dbContext));
+            }
             _dbContext = dbContext;
         }
 

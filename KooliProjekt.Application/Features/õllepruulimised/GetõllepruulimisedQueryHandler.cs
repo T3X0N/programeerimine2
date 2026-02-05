@@ -17,6 +17,10 @@ namespace KooliProjekt.Application.Features.õllepruulimised
 
         public GetõllepruulimisedQueryHandler(ApplicationDbContext dbContext)
         {
+            if (dbContext == null)
+            {
+                throw new ArgumentNullException(nameof(dbContext));
+            }
             _dbContext = dbContext;
         }
 

@@ -25,7 +25,7 @@ namespace KooliProjekt.Application.UnitTests.Features
         public async Task Get_should_return_object_if_object_exists()
         {
             // Arrange
-            var query = new GetkoostisosadQuery{ Id = 0 };
+            var query = new GetkoostisosadQuery{ Id = 1 };
             var todoList = new koostisosa { Nimetus = "Test ToDo List", ühik="ml", kogus=2, ühikuhind=2, summa=2 };
             var handler = new GetkoostisosadQueryHandler(DbContext);
             await DbContext.ToKoostisosa.AddAsync(todoList);  

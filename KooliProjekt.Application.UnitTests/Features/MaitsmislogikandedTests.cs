@@ -25,7 +25,7 @@ namespace KooliProjekt.Application.UnitTests.Features
         public async Task Get_should_return_object_if_object_exists()
         {
             // Arrange
-            var query = new GetmaitsmislogikandedQuery { Id = 0 };
+            var query = new GetmaitsmislogikandedQuery { Id = 1 };
             var todoList = new maitsmistelogikande { kuupäev = "jan", kasutajanimi="proov2", hinne=3, selgitus="okei" };
             var handler = new GetmaitsmislogikandedQueryHandler(DbContext);
             await DbContext.ToMaitsmistelogikande.AddAsync(todoList);  

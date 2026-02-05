@@ -16,6 +16,10 @@ namespace KooliProjekt.Application.Features.kasutajad
 
         public GetKasutajadQueryHandler(ApplicationDbContext dbContext)
         {
+            if (dbContext == null)
+            {
+                throw new ArgumentNullException(nameof(dbContext));
+            }
             _dbContext = dbContext;
         }
 
@@ -29,9 +33,7 @@ namespace KooliProjekt.Application.Features.kasutajad
                 .Select(list => new kasutajaDto
                 {
                     Id = list.Id,
-                    Kasutajanimi = list.Kasutajanimi,
-                    Parool = list.Parool,
-
+                    Kasutajanimi = list.Kasutajanimi
                 })
                 .FirstOrDefaultAsync();
 

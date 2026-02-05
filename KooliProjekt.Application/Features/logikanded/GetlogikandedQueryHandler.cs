@@ -16,6 +16,10 @@ namespace KooliProjekt.Application.Features.logikanded
 
         public GetlogikandedQueryHandler(ApplicationDbContext dbContext)
         {
+            if (dbContext == null)
+            {
+                throw new ArgumentNullException(nameof(dbContext));
+            }
             _dbContext = dbContext;
         }
 

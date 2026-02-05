@@ -16,6 +16,12 @@ namespace KooliProjekt.Application.Features.koostisosad
 
         public GetkoostisosadQueryHandler(ApplicationDbContext dbContext)
         {
+          
+            
+            if (dbContext == null)
+            {
+                throw new ArgumentNullException(nameof(dbContext));
+            }
             _dbContext = dbContext;
         }
 
